@@ -9,9 +9,9 @@ config = Config()
 config.browser_user_agent = user_agent
 
 
-def Summarize(news_data):
+def Summarize(news_data,api):
     
-    openai.api_key = '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'
+    openai.api_key = api
     summarize = openai.Completion.create(
         engine="text-davinci-003",
         prompt=f'Summarize in 30 words "{news_data}"',
@@ -21,6 +21,7 @@ def Summarize(news_data):
     return summarize.choices[0].text
 
 Url=st.text_input('Enter the URL')
+api=st.text_input('Enter the API Key')
 if st.button('Summarize'):
     news_data = Article(Url,config=config)
     news_data.download()
@@ -30,7 +31,7 @@ if st.button('Summarize'):
     st.title(title)
     st.image(news_data.top_image, width=500)
     s="".join(summary).replace('\n','')
-    summarized=Summarize(s)
+    summarized=Summarize(s,api)
     st.write(summarized)
     
 
