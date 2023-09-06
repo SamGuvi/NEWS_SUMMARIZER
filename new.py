@@ -10,8 +10,8 @@ config.browser_user_agent = user_agent
 
 
 def Summarize(news_data):
-    api=st.text_input('Enter Your Api Key')
-    openai.api_key = api
+    
+    openai.api_key = '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'
     summarize = openai.Completion.create(
         engine="text-davinci-003",
         prompt=f'Summarize in 30 words "{news_data}"',
