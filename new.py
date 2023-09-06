@@ -2,6 +2,7 @@ from newspaper import Article
 import streamlit as st
 import openai
 from newspaper import Config
+import os
 
 user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'
 config = Config()
@@ -9,7 +10,7 @@ config.browser_user_agent = user_agent
 
 
 def Summarize(news_data):
-    openai.api_key = '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'
+    openai.api_key = os.environ["OPENAI_API_KEY"]
     summarize = openai.Completion.create(
         engine="text-davinci-003",
         prompt=f'Summarize in 30 words "{news_data}"',
